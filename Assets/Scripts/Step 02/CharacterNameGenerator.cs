@@ -51,10 +51,8 @@ public class CharacterNameGenerator : MonoBehaviour
     /// <param name="character"></param>
     public void SetIndividualCharacter(CharacterName character)
     {
-        // So here rather than each character being called Blanky Blank Blank, we probably want it to be a random first,last and nickname
-
-        // use if?
-
+        // So here rather than each character being called Blanky Blank Blank,
+        // we probably want it to be a random first,last and nickname
 
 
         character.firstName = firstNames[Random.Range(0, firstNames.Count)];
@@ -62,8 +60,6 @@ public class CharacterNameGenerator : MonoBehaviour
         character.nickName = nicknames[Random.Range(0, nicknames.Count)];
         
         Debug.Log(character);
-       
-        
     }
 
     /// <summary>
@@ -74,12 +70,10 @@ public class CharacterNameGenerator : MonoBehaviour
     public void SetTeamCharacterNames(List<CharacterName> teamCharacters)
     {
         // so here we have a list of character names coming in.
-        // we should probably loop over that list of charcter names, and then for each chacter set their first,
-        // last and nickname a random one from our lists
+        // we should probably loop over that list of charcter names, and then for each chacter set their first, last and nickname a random one from our lists
 
-        //foreach (CharacterName character in teamCharacters) ;
-        //Debug.Log("Player One: " + playerOne);
-
+        foreach (CharacterName character in teamCharacters) ;
+        Debug.Log("Player: " + teamCharacters);
 
         // if you want to get fancy you could use another function within this script to help out here.
 

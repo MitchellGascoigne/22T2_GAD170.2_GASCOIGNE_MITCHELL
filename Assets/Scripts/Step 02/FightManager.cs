@@ -30,18 +30,42 @@ public class FightManager : MonoBehaviour
 
         // We should probably determine here who has won, and who has lost by comparing their power levels.
         // we should also do some damage or heal the appropriate characters.
-        // we could also give them some XP if we want to. 
+        // we could also give them some XP if we want to.
         // so we have the character class, which means any variables,references and functions we can access.
 
+        if (playerOnePowerLevel > playerTwoPowerLevel)
+        {
+            teamBCharacter.myStatsSystem.ChangeHealth(playerTwoPowerLevel);
+            teamACharacter.myStatsSystem.DistributePhysicalStatsOnLevelUp(playerOnePowerLevel);
+            teamACharacter.myLevelSystem.AddXP(playerOnePowerLevel);
+            Debug.Log("Player One has Won");
+        }
+
+        else
+        {
+            teamACharacter.myStatsSystem.ChangeHealth(playerOnePowerLevel);
+            teamBCharacter.myStatsSystem.DistributePhysicalStatsOnLevelUp(playerTwoPowerLevel);
+            teamBCharacter.myLevelSystem.AddXP(playerTwoPowerLevel);
+            Debug.Log("Player Two has Won");
+        }
+
         // By default it will automatically be a draw.
-        string battleMessage = teamACharacter.charName.GetFullCharacterName() + " " + teamBCharacter.charName.GetFullCharacterName() + " fight is a draw";
+        string battleMessage = teamACharacter.charName.GetFullCharacterName() + " " + teamBCharacter.charName.GetFullCharacterName();
+
         // Logs out the message to our console         
         BattleLog.Log(battleMessage, drawCol);
         BattleLog.Log("team A draw", teamAColour);
         BattleLog.Log("team B draw", teamBColour);
+
         // here we are just telling the system who has won, and who has lost; for any other result other than a draw we should probably pass in false.
         FightCompleted(teamBCharacter, teamACharacter, true);
-        
+
+
+
+
+
+        FightCompleted(teamBCharacter, teamACharacter, false);
+
     }
 
 

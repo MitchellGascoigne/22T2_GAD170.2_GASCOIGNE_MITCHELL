@@ -39,6 +39,7 @@ public class FightManager : MonoBehaviour
             teamACharacter.myStatsSystem.DistributePhysicalStatsOnLevelUp(playerOnePowerLevel);
             teamACharacter.myLevelSystem.AddXP(playerOnePowerLevel);
             Debug.Log("Player One has Won");
+            
         }
 
         else
@@ -47,25 +48,30 @@ public class FightManager : MonoBehaviour
             teamBCharacter.myStatsSystem.DistributePhysicalStatsOnLevelUp(playerTwoPowerLevel);
             teamBCharacter.myLevelSystem.AddXP(playerTwoPowerLevel);
             Debug.Log("Player Two has Won");
+          
+            
         }
 
         // By default it will automatically be a draw.
-        string battleMessage = teamACharacter.charName.GetFullCharacterName() + " " + teamBCharacter.charName.GetFullCharacterName();
+        string battleMessage = teamACharacter.charName.GetFullCharacterName() + " " + teamBCharacter.charName.GetFullCharacterName()+ "draw";
+
+
 
         // Logs out the message to our console         
         BattleLog.Log(battleMessage, drawCol);
         BattleLog.Log("team A draw", teamAColour);
         BattleLog.Log("team B draw", teamBColour);
 
-        // here we are just telling the system who has won, and who has lost; for any other result other than a draw we should probably pass in false.
+       // BattleLog.Log(, drawCol);
+        BattleLog.Log("team A one", teamAColour);
+        BattleLog.Log("team B lose", teamBColour);
+
+        // here we are just telling the system who has won, and who has lost; for any other result other than a draw
+        // we should probably pass in false.
         FightCompleted(teamBCharacter, teamACharacter, true);
 
-
-
-
-
         FightCompleted(teamBCharacter, teamACharacter, false);
-
+        FightCompleted(teamACharacter, teamBCharacter, false);
     }
 
 

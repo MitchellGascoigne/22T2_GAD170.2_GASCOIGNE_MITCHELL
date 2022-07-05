@@ -33,45 +33,46 @@ public class FightManager : MonoBehaviour
         // we could also give them some XP if we want to.
         // so we have the character class, which means any variables,references and functions we can access.
 
-        if (playerOnePowerLevel > playerTwoPowerLevel)
-        {
-            teamBCharacter.myStatsSystem.ChangeHealth(playerTwoPowerLevel);
-            teamACharacter.myStatsSystem.DistributePhysicalStatsOnLevelUp(playerOnePowerLevel);
-            teamACharacter.myLevelSystem.AddXP(playerOnePowerLevel);
-            Debug.Log("Player One has Won");
-            
-        }
-
-        else
-        {
-            teamACharacter.myStatsSystem.ChangeHealth(playerOnePowerLevel);
-            teamBCharacter.myStatsSystem.DistributePhysicalStatsOnLevelUp(playerTwoPowerLevel);
-            teamBCharacter.myLevelSystem.AddXP(playerTwoPowerLevel);
-            Debug.Log("Player Two has Won");
-          
-            
-        }
-
         // By default it will automatically be a draw.
         string battleMessage = teamACharacter.charName.GetFullCharacterName() + " " + teamBCharacter.charName.GetFullCharacterName()+ "draw";
 
 
+        if (playerOnePowerLevel > playerTwoPowerLevel)
+        {
+            // check logic
+            teamBCharacter.myStatsSystem.ChangeHealth(playerOnePowerLevel);
+            teamACharacter.myStatsSystem.DistributePhysicalStatsOnLevelUp(playerOnePowerLevel);
+            teamACharacter.myLevelSystem.AddXP(playerOnePowerLevel);
+            battleMessage = teamACharacter.charName.GetFullCharacterName() + "Has One";
+            drawCol = teamAColour;
+            FightCompleted(teamACharacter, teamBCharacter, false);
+        }
+        // can re-use a variable, "If" will overide the value if it changes, if doesnt change refers to original
+        else if(playerOnePowerLevel < playerTwoPowerLevel)
+        {
+            teamACharacter.myStatsSystem.ChangeHealth(playerTwoPowerLevel);
+            teamBCharacter.myStatsSystem.DistributePhysicalStatsOnLevelUp(playerTwoPowerLevel);
+            teamBCharacter.myLevelSystem.AddXP(playerTwoPowerLevel);
+            battleMessage = teamBCharacter.charName.GetFullCharacterName() + "Has One";
+            drawCol = teamBColour;
+            FightCompleted(teamBCharacter, teamACharacter, false);
+        }
+        else
+        {
+            // decide how stats are distributed
+            // here we are just telling the system who has won, and who has lost; for any other result other than a draw
+            // we should probably pass in false.
+            FightCompleted(teamBCharacter, teamACharacter, true);
+
+        }
+
 
         // Logs out the message to our console         
         BattleLog.Log(battleMessage, drawCol);
-        BattleLog.Log("team A draw", teamAColour);
-        BattleLog.Log("team B draw", teamBColour);
 
-       // BattleLog.Log(, drawCol);
-        BattleLog.Log("team A one", teamAColour);
-        BattleLog.Log("team B lose", teamBColour);
 
-        // here we are just telling the system who has won, and who has lost; for any other result other than a draw
-        // we should probably pass in false.
-        FightCompleted(teamBCharacter, teamACharacter, true);
+        
 
-        FightCompleted(teamBCharacter, teamACharacter, false);
-        FightCompleted(teamACharacter, teamBCharacter, false);
     }
 
 

@@ -33,9 +33,10 @@ public class BattleSystem : MonoBehaviour
         else if (teamA.activeDancers.Count > 0 && teamB.activeDancers.Count > 0)
         {
             //You need to select two random or engineered random characters to fight...so one from team a and one from team b....
-            // we could also get fancy here by using the simulate battle first if we wanted to to find characters for a closer chance of winning, but to start with let's just keep it simple and randomly select one.
+            // we could also get fancy here by using the simulate battle first if we wanted to to find characters for a closer chance of winning,
+            // but to start with let's just keep it simple and randomly select one.
 
-            Character teamAcharacter = null; // instead of null (nothing) we probably want a random charcter from each team.
+            Character teamAcharacter = null;// instead of null (nothing) we probably want a random character from each team.
             Character teamBCharacter = null;
             fightManager.Fight(teamAcharacter, teamBCharacter);
         }

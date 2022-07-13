@@ -40,20 +40,20 @@ public class FightManager : MonoBehaviour
         if (playerOnePowerLevel > playerTwoPowerLevel)
         {
             // check logic
-            teamBCharacter.myStatsSystem.ChangeHealth(playerOnePowerLevel);
+            teamBCharacter.myStatsSystem.ChangeHealth(playerTwoPowerLevel);
             teamACharacter.myStatsSystem.DistributePhysicalStatsOnLevelUp(playerOnePowerLevel);
             teamACharacter.myLevelSystem.AddXP(playerOnePowerLevel);
-            battleMessage = teamACharacter.charName.GetFullCharacterName() + "Has One";
+            battleMessage = teamACharacter.charName.GetFullCharacterName() + " Has Won";
             drawCol = teamAColour;
             FightCompleted(teamACharacter, teamBCharacter, false);
         }
         // can re-use a variable, "If" will overide the value if it changes, if doesnt change refers to original
         else if(playerOnePowerLevel < playerTwoPowerLevel)
         {
-            teamACharacter.myStatsSystem.ChangeHealth(playerTwoPowerLevel);
+            teamACharacter.myStatsSystem.ChangeHealth(playerOnePowerLevel);
             teamBCharacter.myStatsSystem.DistributePhysicalStatsOnLevelUp(playerTwoPowerLevel);
             teamBCharacter.myLevelSystem.AddXP(playerTwoPowerLevel);
-            battleMessage = teamBCharacter.charName.GetFullCharacterName() + "Has One";
+            battleMessage = teamBCharacter.charName.GetFullCharacterName() + " Has Won";
             drawCol = teamBColour;
             FightCompleted(teamBCharacter, teamACharacter, false);
         }

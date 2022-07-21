@@ -23,6 +23,7 @@ public class DanceTeam : MonoBehaviour
     public List<Transform> characterSpawnPoints = new List<Transform>(); // these will be the spawn points for the characters
 
     public CharacterNameGenerator nameGenerator;
+    private List<CharacterName> teamCharacters;
 
     /// <summary>
     /// Takes in a dancer prefab and loops over all the spawn points in the game and spawns a dancer for us.
@@ -33,29 +34,35 @@ public class DanceTeam : MonoBehaviour
         List<CharacterName> allCharacterNames = new List<CharacterName>(); // a list to hold all our character name references.
 
         // so here we want to be able to loop over all of our character spawn points.
-      
-            // for each spawn point, we want to use our Instantiate(Gameobject, Vector3, Quaternion); and pass in our dancer prefab, as well as the position and rotation of the spawn point
-            // Once that does occur, we should store what was spawned into a gameobject for use later on.
-            GameObject clone = null;
+
+        // for each spawn point, we want to use our Instantiate(Gameobject, Vector3, Quaternion); and pass in our dancer prefab, as well as the position and rotation of the spawn point
+        // Once that does occur, we should store what was spawned into a gameobject for use later on.
+        for (int i = 0; i < characterSpawnPoints.Count; i++)
+        {
+            GameObject clone = Instantiate(dancerPrefab, characterSpawnPoints[i].position, Quaternion.identity);
+
+
 
             // After our dancer clone is spawned, we should use a getcomponent on the dancer and store a reference to the charactername class.
-            CharacterName clonedCharacterName = null;
+            CharacterName clonedCharacterName = clone.GetComponent<CharacterName>();
             // with that referecne let's add it to our list of all character names.
             allCharacterNames.Add(clonedCharacterName);
-            
+
             // here let's grab a reference to the character class that is on the cloned dancer, we probably want to use get component to grab it and store it. 
-            Character cloneCharacter = null;
+            Character cloneCharacter = clone.GetComponent<Character>();
 
             if (clone != null)
             {
                 // Here we are using this, this is essentially referening myself; so the clone character gets a reference of this class.
                 cloneCharacter.myTeam = this;
-                // finally let's call the AddNewDancer function and pass in our reference to our cloneCharcter
-
+                // finally let's call the AddNewDancer function and pass in our reference to our cloneCharacter
+                AddNewDancer(cloneCharacter);
             }
+        }
+        // we get to here our team is spawned in, yay but now.... we want to call the SetTeamCharacterNames function from our NameGenerator assuming we already
+        // have a reference to it and pass in our list of all character names
+        // CharacterNameGenerator.SetTeamCharacterNames();
 
-        // we get to here our team is spawned in, yay but now.... we want to call the SetTeamCharacterNames function from our NameGenerator assuming we already have a reference to it
-        // and pass in our list of all character names
     }
 
     /// <summary>
@@ -64,7 +71,8 @@ public class DanceTeam : MonoBehaviour
     private void AddNewDancer(Character dancer)
     {
         // here we want to add the dancer coming in, into our active and all dancers lists.
-
+        allDancers.Add(dancer);
+        activeDancers.Add(dancer);
     }
 
     /// <summary>
@@ -74,6 +82,8 @@ public class DanceTeam : MonoBehaviour
     public void RemoveDancerFromActive(Character dancer)
     {
         // so here we have a dancer coming in, we should probably remove them from our active dancers list.
+        activeDancers.Remove(dancer);
+
     }
 
     #region No mods Required

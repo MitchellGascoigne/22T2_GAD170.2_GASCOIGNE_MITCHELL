@@ -23,7 +23,7 @@ public class LevelingSystem : MonoBehaviour
     /// </summary>
     public void SetDefaultValues()
     {
-        // set our current level to 1
+        // 
         currentLevel = 1;
         // set our current XP to zero
         currentXp = 0;
@@ -47,6 +47,7 @@ public class LevelingSystem : MonoBehaviour
         // if we do then let's call our level up function.
         LevelUp();
         Debug.Log("You have levelled up, your current Level is now " + currentLevel);
+        Debug.Log("The new Xp Threshold is " + currentXPThreshold);
     }
 
     /// <summary>
@@ -59,12 +60,8 @@ public class LevelingSystem : MonoBehaviour
         if (currentXp > currentXPThreshold)
         {
             currentLevel++;
-         
-            Debug.Log("The new Xp Threshold is " + currentXPThreshold);
         }
-
     }
-
     #region No Mods Required.
     public void TestImplementation()
     {

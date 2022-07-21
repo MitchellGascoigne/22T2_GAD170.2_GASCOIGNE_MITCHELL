@@ -84,7 +84,6 @@ public class StatsSystem : MonoBehaviour
     /// <summary>
     /// A function used to assign a random amount of points ot each of our skills.
     /// </summary>
-    /// 
 
     public void DistributePhysicalStatsOnLevelUp(int PointsPool)
     {

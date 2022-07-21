@@ -70,7 +70,7 @@ public class CharacterNameGenerator : MonoBehaviour
     public void SetTeamCharacterNames(List<CharacterName> teamCharacters)
     {
         // so here we have a list of character names coming in.
-        // we should probably loop over that list of charcter names, and then for each chacter set their first, last and nickname a random one from our lists
+        // we should probably loop over that list of character names, and then for each character set their first, last and nickname a random one from our lists
 
         foreach (CharacterName character in teamCharacters) ;
         Debug.Log("Player: " + teamCharacters);
